@@ -1,0 +1,35 @@
+@api = http://localhost:5280
+
+### Rodar as regras ativas sobre o catálogo
+POST {{api}}/api/validation/run
+
+### IA: regra a partir de texto (vira proposta, com simulação)
+POST {{api}}/api/ai/rules
+Content-Type: application/json
+X-User: erick
+
+{ "request": "ISBN obrigatório quando a categoria for Livro" }
+
+### Aprovar a regra proposta (troque o id)
+POST {{api}}/api/rules/5/approve
+X-User: erick
+
+### IA: sugestões de correção para um produto
+POST {{api}}/api/ai/fixes/LIV-006
+
+### Aplicar uma correção (decisão humana)
+POST {{api}}/api/products/LIV-006/apply-fix
+Content-Type: application/json
+
+{ "field": "category", "value": "Livro" }
+
+### Regra escrita à mão
+POST {{api}}/api/rules
+Content-Type: application/json
+
+{
+  "name": "Nome com no máximo 60 caracteres",
+  "check": { "field": "name", "op": "maxLength", "value": 60 },
+  "severity": "warning",
+  "message": "Nome longo demais para a vitrine."
+}

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DataQualityRules.Api/DataQualityRules.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DataQualityRules.Tests/DataQualityRules.Tests.csproj" />
+  </Folder>
+</Solution>
